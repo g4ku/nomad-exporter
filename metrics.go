@@ -228,6 +228,7 @@ var (
 		[]string{
 			"status",
 			"job_id",
+			"job_version",
 		},
 	)
 
@@ -237,6 +238,7 @@ var (
 		Help:      "The number of desired canaries for the task group.",
 	},
 		[]string{
+			"status",
 			"job_id",
 			"job_version",
 			"task_group",
@@ -251,6 +253,7 @@ var (
 		Help:      "The number of desired allocs for the task group.",
 	},
 		[]string{
+			"status",
 			"job_id",
 			"job_version",
 			"task_group",
@@ -265,6 +268,7 @@ var (
 		Help:      "The number of placed allocs for the task group.",
 	},
 		[]string{
+			"status",
 			"job_id",
 			"job_version",
 			"task_group",
@@ -279,6 +283,7 @@ var (
 		Help:      "The number of healthy allocs for the task group.",
 	},
 		[]string{
+			"status",
 			"job_id",
 			"job_version",
 			"task_group",
@@ -293,6 +298,7 @@ var (
 		Help:      "the number of unhealthy allocs for the task group",
 	},
 		[]string{
+			"status",
 			"job_id",
 			"job_version",
 			"task_group",

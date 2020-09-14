@@ -116,12 +116,12 @@ recording metrics from any hosts regardless of it being the leader or not.
 |nomad_allocation | Allocation labeled with runtime information. | status, desired_status, job_type, job_id, job_version, task_group, node |
 |nomad_evals_total | The number of evaluations. | status |
 |nomad_tasks_total | The number of tasks. | state, job_type, node |
-|nomad_deployments_total | The number of deployments. | status, job_id |
-|nomad_deployment_task_group_desired_canaries_total | The number of desired canaries for the task group. | job_id, job_version, task_group, promoted, auto_revert |
-|nomad_deployment_task_group_desired_total | The number of desired allocs for the task group. | job_id, job_version, task_group, promoted, auto_revert |
-|nomad_deployment_task_group_healthy_allocs_total | The number of healthy allocs for the task group. | job_id, job_version, task_group, promoted, auto_revert |
-|nomad_deployment_task_group_placed_allocs_total | The number of placed allocs for the task group. | job_id, job_version, task_group, promoted, auto_revert |
-|nomad_deployment_task_group_unhealthy_allocs_total | The number of unhealthy allocs for the task group. | job_id, job_version, task_group, promoted, auto_revert |
+|nomad_deployments_total | The number of deployments. | status, job_id, job_version |
+|nomad_deployment_task_group_desired_canaries_total | The number of desired canaries for the task group. | status, job_id, job_version, task_group, promoted, auto_revert |
+|nomad_deployment_task_group_desired_total | The number of desired allocs for the task group. | status, job_id, job_version, task_group, promoted, auto_revert |
+|nomad_deployment_task_group_healthy_allocs_total | The number of healthy allocs for the task group. | status, job_id, job_version, task_group, promoted, auto_revert |
+|nomad_deployment_task_group_placed_allocs_total | The number of placed allocs for the task group. | status, job_id, job_version, task_group, promoted, auto_revert |
+|nomad_deployment_task_group_unhealthy_allocs_total | The number of unhealthy allocs for the task group. | status, job_id, job_version, task_group, promoted, auto_revert |
 |nomad_allocation_memory_rss_bytes | Allocation memory usage. | job, job_version, group, alloc, region, datacenter, node |
 |nomad_allocation_memory_rss_bytes_limit | Allocation memory limit. | job, job_version, group, alloc, region, datacenter, node |
 |nomad_allocation_cpu_percent | Allocation CPU usage. | job, job_version, group, alloc, region, datacenter, node |

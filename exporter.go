@@ -249,7 +249,7 @@ func (e *Exporter) collectNodes(nodes nodeMap, ch chan<- prometheus.Metric) erro
 
 				ch <- prometheus.MustNewConstMetric(
 					nodeInfo, prometheus.GaugeValue, 1,
-					node.NodeClass, node.Datacenter, drain, node.Name, 
+					node.NodeClass, node.Datacenter, drain, node.Name,
 					node.ID, node.SchedulingEligibility, node.Status, node.Version,
 				)
 
@@ -666,12 +666,14 @@ func (e *Exporter) collectDeploymentMetrics(ch chan<- prometheus.Metric) error {
 		taskGroups := dep.TaskGroups
 
 		deploymentCount.With(prometheus.Labels{
-			"status": dep.Status,
-			"job_id": dep.JobID,
+			"status":      dep.Status,
+			"job_id":      dep.JobID,
+			"job_version": fmt.Sprintf("%d", dep.JobVersion),
 		}).Add(1)
 
 		for taskGroupName, taskGroup := range taskGroups {
 			deploymentLabels := []string{
+				dep.Status,
 				dep.JobID,
 				fmt.Sprintf("%d", dep.JobVersion),
 				taskGroupName,
