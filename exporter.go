@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"net"
+	_ "net/http/pprof"
 	"net/url"
 	"strconv"
 	"sync"
@@ -12,8 +13,6 @@ import (
 	"github.com/hashicorp/nomad/api"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/sirupsen/logrus"
-
-	_ "net/http/pprof"
 )
 
 // Exporter is a nomad exporter
@@ -561,7 +560,7 @@ func (e *Exporter) collectAllocations(nodes nodeMap, ch chan<- prometheus.Metric
 				*alloc.Job.Name,
 				fmt.Sprintf("%d", *alloc.Job.Version),
 				alloc.TaskGroup,
-				alloc.Name,
+				alloc.ID,
 				*alloc.Job.Region,
 				n.Datacenter,
 				n.Name,
@@ -576,13 +575,13 @@ func (e *Exporter) collectAllocations(nodes nodeMap, ch chan<- prometheus.Metric
 				allocationMemoryBytes, prometheus.GaugeValue, float64(stats.ResourceUsage.MemoryStats.RSS), allocationLabels...,
 			)
 			ch <- prometheus.MustNewConstMetric(
-				allocationCPUTicks, prometheus.GaugeValue, float64(stats.ResourceUsage.CpuStats.TotalTicks), allocationLabels...,
+				allocationCPUTicks, prometheus.GaugeValue, stats.ResourceUsage.CpuStats.TotalTicks, allocationLabels...,
 			)
 			ch <- prometheus.MustNewConstMetric(
-				allocationCPUUserMode, prometheus.GaugeValue, float64(stats.ResourceUsage.CpuStats.UserMode), allocationLabels...,
+				allocationCPUUserMode, prometheus.GaugeValue, stats.ResourceUsage.CpuStats.UserMode, allocationLabels...,
 			)
 			ch <- prometheus.MustNewConstMetric(
-				allocationCPUSystemMode, prometheus.GaugeValue, float64(stats.ResourceUsage.CpuStats.SystemMode), allocationLabels...,
+				allocationCPUSystemMode, prometheus.GaugeValue, stats.ResourceUsage.CpuStats.SystemMode, allocationLabels...,
 			)
 
 			ch <- prometheus.MustNewConstMetric(

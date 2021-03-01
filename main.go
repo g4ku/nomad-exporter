@@ -8,11 +8,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/nomad/api"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/sirupsen/logrus"
-
-	cleanhttp "github.com/hashicorp/go-cleanhttp"
 
 	"gitlab.com/yakshaving.art/nomad-exporter/version"
 )
@@ -51,7 +51,7 @@ func main() {
 
 	http.HandleFunc("/", rootFunc(a.MetricsPath))
 	http.HandleFunc("/status", statusFunc(exporter))
-	http.Handle(a.MetricsPath, prometheus.Handler())
+	http.Handle(a.MetricsPath, promhttp.Handler())
 
 	logrus.Println("Listening on", a.ListenAddress)
 	logrus.Fatal(http.ListenAndServe(a.ListenAddress, nil))
